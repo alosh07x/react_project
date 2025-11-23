@@ -21,6 +21,13 @@ function Navbar() {
           Home
         </Link>
 
+         <Link
+          to="/about"
+          className="bg-white text-blue-500 px-4 py-2 rounded-full hover:bg-blue-500 hover:text-white transition"
+        >
+          About
+        </Link>
+
         <Link
           to="/products"
           className="bg-white text-blue-500 px-4 py-2 rounded-full hover:bg-blue-500 hover:text-white transition"
@@ -30,12 +37,7 @@ function Navbar() {
 
         
 
-        <Link
-          to="/about"
-          className="bg-white text-blue-500 px-4 py-2 rounded-full hover:bg-blue-500 hover:text-white transition"
-        >
-          About
-        </Link>
+       
 
         <Link
           to="/contact"

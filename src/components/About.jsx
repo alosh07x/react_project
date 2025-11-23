@@ -1,5 +1,5 @@
 import React from "react";
-import img1 from "./image/mohamad.jpg";
+import img1 from "./img/mohamad.jpg";
 function About() {
   return (
     <section id="about" className="bg-gray-50 py-16">

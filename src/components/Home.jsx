@@ -1,5 +1,5 @@
 import React from "react";
-import img3 from "./image/mohamad4.jpg";
+import img3 from "./img/mohamad4.jpg";
 
 function Home() {
   return (
