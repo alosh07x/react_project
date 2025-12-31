@@ -36,14 +36,18 @@ function Navbar() {
         </Link>
 
         
-
-       
-
         <Link
           to="/contact"
           className="bg-white text-blue-500 px-4 py-2 rounded-full hover:bg-blue-500 hover:text-white transition"
         >
           Contact
+        </Link>
+
+        <Link
+          to="/login"
+          className="bg-white text-blue-500 px-4 py-2 rounded-full hover:bg-blue-500 hover:text-white transition"
+        >
+          Login
         </Link>
       </div>
 

@@ -5,6 +5,7 @@ import Products from './components/Products';
 import Contact from './components/Contact';
 import Navbar from './components/Navbar';
 import About from './components/About';
+import Login from './components/Login';
 import { CartProvider } from './components/Products/CartContext';
 
 
@@ -16,6 +17,7 @@ function App() {
       
       <Routes>
        <Route path="/" element={<Home />} />
+       <Route path="/login" element={<Login />} />
         <Route path="/products" element={<Products />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
