@@ -67,7 +67,7 @@ function Contact() {
     try {
       setIsLoading(true);
       const response = await axios.post(
-        "http://localhost:8081/contact",
+        process.env.REACT_APP_API_URL || "http://localhost:8081",
         contactToAdd
       );
       if (response.status === 201) {
