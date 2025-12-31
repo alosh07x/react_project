@@ -69,7 +69,7 @@ function Login() {
     try {
       setIsLoading(true);
       
-      const res = await axios.post("http://localhost:8081/login", {
+      const res = await axios.post(process.env.REACT_APP_API_URL || "http://localhost:8081", {
         email: loginEmail,
         password: loginPassword,
       });
@@ -105,7 +105,7 @@ function Login() {
     try {
       setIsLoading(true);
     
-      const res = await axios.post("http://localhost:8081/register", {
+      const res = await axios.post(process.env.REACT_APP_API_URL || "http://localhost:8081", {
         username: signupUsername,
         email: signupEmail,
         password: signupPassword,
