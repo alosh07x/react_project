@@ -5,6 +5,7 @@ import ProductModal from './Products/ProductPop';
 import CartSidebar from './Products/CartSidebar';
 import { useCart } from './Products/CartContext';
 
+const API_URL = process.env.REACT_APP_API_URL;
 
 const categories = [
   "Tissues", 
@@ -24,7 +25,7 @@ const Products = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get(process.env.REACT_APP_API_URL || "http://localhost:8081");
+        const res = await axios.get(API_URL + "/products");
         setProducts(res.data);
       } catch (err) {
         console.log("Error fetching products:", err);

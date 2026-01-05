@@ -58,8 +58,9 @@ function Login() {
     setSignupConfirmPassword("");
   };
 
-  // Login handler
+  const API_URL = process.env.REACT_APP_API_URL;
 
+  // Login handler
   const loginUser = async () => {
     if (!loginEmail || !loginPassword) {
       showError("Please fill in all login fields.");
@@ -69,18 +70,20 @@ function Login() {
     try {
       setIsLoading(true);
       
-      const res = await axios.post(process.env.REACT_APP_API_URL || "http://localhost:8081", {
+      const res = await axios.post(API_URL + "/login", {
         email: loginEmail,
         password: loginPassword,
       });
 
-      
-      if (res.data.user) {
-         showSuccess("Login successful!");
-         
-         
-         localStorage.setItem("currentUser", JSON.stringify(res.data.user));
-         
+      if (res.data.message === "Login successful"){
+        
+        // --- CRITICAL FIX HERE ---
+        // We now save the ENTIRE response (res.data)
+        // This includes both the 'user' object AND the 'token' string.
+        localStorage.setItem("currentUser", JSON.stringify(res.data)); 
+        // -------------------------
+
+        showSuccess("Login successful!");
          
          setTimeout(() => {
              window.location.href = "/"; 
@@ -97,15 +100,18 @@ function Login() {
       setIsLoading(false);
     }
   };
-  // Signup handler
- 
-  const registerUser = async () => {
 
+  // Signup handler
+  const registerUser = async () => {
+    if (signupPassword !== signupConfirmPassword) {
+        showError("Passwords do not match!");
+        return;
+    }
 
     try {
       setIsLoading(true);
     
-      const res = await axios.post(process.env.REACT_APP_API_URL || "http://localhost:8081", {
+      const res = await axios.post(API_URL + "/register", {
         username: signupUsername,
         email: signupEmail,
         password: signupPassword,
@@ -135,7 +141,6 @@ function Login() {
           <label className="block mb-2">Email</label>
             <input
               type="email"
-             
               value={loginEmail}
               onChange={(e) => LoginEmail(e.target.value)}
               className="w-full h-[40px] mb-4 px-3 border rounded-[10px]"
@@ -145,7 +150,6 @@ function Login() {
           <label className="block mb-2">Password</label>
             <input
               type="password"
-              
               value={loginPassword}
               onChange={(e) => LoginPassword(e.target.value)}
               className="w-full h-[40px] mb-4 px-3 border rounded-[10px]"
@@ -179,7 +183,6 @@ function Login() {
            <label className="block mb-2">Username</label></div>
             <input
               type="text"
-              
               value={signupUsername}
               onChange={(e) => setSignupUsername(e.target.value)}
               className="w-full h-[40px] mb-4 px-3 border rounded-[10px]"
@@ -188,7 +191,6 @@ function Login() {
            <label className="block mb-2">Email</label></div>
             <input
               type="email"
-              
               value={signupEmail}
               onChange={(e) => setSignupEmail(e.target.value)}
               className="w-full h-[40px] mb-4 px-3 border rounded-[10px]"
@@ -197,7 +199,6 @@ function Login() {
            <label className="block mb-2">Password</label></div>
             <input
               type="password"
-              
               value={signupPassword}
               onChange={(e) => setSignupPassword(e.target.value)}
               className="w-full h-[40px] mb-4 px-3 border rounded-[10px]"
@@ -206,7 +207,6 @@ function Login() {
            <label className="block mb-2">Confirm Password</label></div>
             <input
               type="password"
-              
               value={signupConfirmPassword}
               onChange={(e) => setSignupConfirmPassword(e.target.value)}
               className="w-full h-[40px] mb-4 px-3 border rounded-[10px]"
